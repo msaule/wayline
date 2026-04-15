@@ -16,7 +16,6 @@ const elements = {
   hotelBrandsInput: document.getElementById("hotelBrandsInput"),
   planButton: document.getElementById("planButton"),
   resetButton: document.getElementById("resetButton"),
-  showEnvButton: document.getElementById("showEnvButton"),
   openMapsButton: document.getElementById("openMapsButton"),
   copyButton: document.getElementById("copyButton"),
   savePdfButton: document.getElementById("savePdfButton"),
@@ -140,7 +139,7 @@ function renderApiStatus() {
   const { environment, runtime } = state.appState;
   const apiPill = environment.apiKeyConfigured
     ? '<span class="status-pill good">Ready</span>'
-    : '<span class="status-pill warn">Key missing</span>';
+    : '<span class="status-pill warn">Unavailable</span>';
   const runtimeLabel =
     runtime === "hosted-web"
       ? "Hosted app"
@@ -151,21 +150,27 @@ function renderApiStatus() {
           : "Desktop app";
   const copy = environment.apiKeyConfigured
     ? runtime === "hosted-web"
-      ? "This deployment is connected to server-side Google Maps credentials."
+      ? "Trip planning is available."
       : runtime === "web"
-        ? "This local preview is using your backend routes and local environment."
-        : "The desktop app is ready to build routes, fuel stops, and hotel areas from your local environment."
+        ? "Connected to your local setup."
+        : "Ready to build trips from this machine."
     : runtime === "static-site"
-      ? "This static shell shows the product surface only. Live trip planning needs the desktop app, the local web server, or the hosted app."
+      ? "This preview only shows the interface. Live planning is not available here."
     : runtime === "hosted-web"
-      ? "The hosted backend is missing GOOGLE_MAPS_API_KEY."
+      ? "Trip planning is temporarily unavailable."
       : runtime === "web"
-        ? "Add GOOGLE_MAPS_API_KEY to your local .env file before starting the web preview."
-      : "Create a .env file from .env.example, then add GOOGLE_MAPS_API_KEY before building a trip.";
+        ? "Add your Google Maps key to .env before starting the web preview."
+      : "Add your Google Maps key to .env before building a trip.";
 
   elements.runtimePill.textContent = runtimeLabel;
 
-  elements.showEnvButton.textContent = runtime === "desktop" ? "Key file" : "Backend";
+  if (runtime === "hosted-web") {
+    elements.apiStatusCard.innerHTML = `
+      ${apiPill}
+      <p>${escapeHtml(copy)}</p>
+    `;
+    return;
+  }
 
   elements.apiStatusCard.innerHTML = `
     ${apiPill}
@@ -173,7 +178,6 @@ function renderApiStatus() {
     <ul class="plain-list">
       <li><strong>Runtime:</strong> ${escapeHtml(runtimeLabel)}</li>
       <li><strong>Key source:</strong> ${escapeHtml(environment.envSourceLabel)}</li>
-      <li><strong>Backend note:</strong> ${escapeHtml(environment.envSourceDetail)}</li>
       <li><strong>Enabled APIs:</strong> ${environment.requiredApis.map(escapeHtml).join(", ")}</li>
       <li><strong>Region bias:</strong> ${escapeHtml(environment.regionCode)}</li>
     </ul>
@@ -566,10 +570,6 @@ async function initialize() {
 elements.plannerForm.addEventListener("submit", handlePlanSubmit);
 elements.resetButton.addEventListener("click", () => {
   fillDefaults();
-});
-
-elements.showEnvButton.addEventListener("click", async () => {
-  await bridge.showEnvFiles();
 });
 
 elements.copyButton.addEventListener("click", async () => {

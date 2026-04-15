@@ -16,8 +16,6 @@
         </a>
 
         <nav class="site-nav">
-          <a href="./how-it-works/">How it works</a>
-          <a href="./privacy/">Privacy</a>
           <a class="nav-action" href="./planner/">Open planner</a>
         </nav>
       </header>
@@ -28,27 +26,20 @@
             <div class="eyebrow">Road trip planning</div>
             <h1>Build the whole drive before you leave.</h1>
             <p class="hero-summary">
-              Wayline turns a long drive into a day-by-day plan with route-aware fuel stops, overnight hotel picks, and a clean Google Maps handoff.
+              Route, fuel stops, overnight hotel picks, and Google Maps links in one clean itinerary.
             </p>
 
             <div class="cta-row">
               <a class="primary-link" href="./planner/">Open planner</a>
-              <a class="secondary-link" href="./how-it-works/">See how it works</a>
             </div>
           </div>
 
           <div class="showcase-window">
-            <div class="window-bar">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-
-            <div class="showcase-grid">
+            <div class="showcase-grid showcase-grid-simple">
               <section class="showcase-summary">
                 <div class="mini-label">Example trip</div>
                 <h2>Las Vegas to Greensboro</h2>
-                <p>Fastest practical route, two overnight stops, seven fuel stops, and one itinerary ready for the road.</p>
+                <p>Fastest practical route, two overnight stops, seven fuel stops, and a finished plan ready for the road.</p>
 
                 <div class="metric-row">
                   <div>
@@ -73,108 +64,42 @@
                   <span>Forrest City</span>
                   <span>Greensboro</span>
                 </div>
-
-                <div class="route-line"></div>
-
-                <div class="detail-grid">
-                  <article class="detail-card">
-                    <div class="mini-label">Fuel</div>
-                    <h3>Stops stay close to the route.</h3>
-                    <p>Wayline looks around each target window so a better stop can beat a bad detour.</p>
-                  </article>
-                  <article class="detail-card">
-                    <div class="mini-label">Hotels</div>
-                    <h3>Overnights feel normal.</h3>
-                    <p>Hotel areas are chosen for access, food nearby, and a cleaner next morning.</p>
-                  </article>
-                </div>
               </section>
             </div>
           </div>
         </section>
 
-        <section class="statement-band">
-          <div class="statement-copy">
-            <div class="eyebrow">Why it exists</div>
-            <h2>Maps can get you there. The trip plan still takes work.</h2>
-          </div>
-          <p>
-            Most long drives fall apart in the same places: awkward fuel timing, late hotel decisions, and too much last-minute route juggling. Wayline handles those decisions together, around one route.
-          </p>
-        </section>
-
-        <section class="section">
-          <div class="section-heading section-heading-compact">
-            <div>
-              <div class="eyebrow">What it does</div>
-              <h2>Designed for long drives, not just directions.</h2>
-            </div>
-          </div>
-
+        <section class="section section-clean">
           <div class="feature-grid">
             <article class="feature-card">
               <div class="mini-label">Route</div>
               <h3>Start with the fastest practical drive.</h3>
-              <p>The planner begins with the route and keeps later choices anchored to it.</p>
+              <p>The trip stays centered on the route first, then builds the stops around it.</p>
             </article>
 
             <article class="feature-card">
               <div class="mini-label">Fuel</div>
-              <h3>Pick stops that feel right at highway speed.</h3>
-              <p>Major chains, reviews, and detour distance all matter more than exact spreadsheet purity.</p>
+              <h3>Pick stops that fit the road.</h3>
+              <p>Wayline searches around each target window so better stops can beat bad detours.</p>
             </article>
 
             <article class="feature-card">
-              <div class="mini-label">Overnights</div>
-              <h3>Stop in places you would actually want to stop.</h3>
-              <p>Wayline favors easier hotel clusters over isolated endpoints that look good only on mileage.</p>
+              <div class="mini-label">Hotels</div>
+              <h3>Stop where the night makes sense.</h3>
+              <p>Overnight areas are chosen for hotel usefulness and easier next-day access.</p>
             </article>
           </div>
         </section>
 
-        <section class="section section-dark">
-          <div class="section-heading section-heading-compact">
-            <div>
-              <div class="eyebrow">How it is built</div>
-              <h2>Simple in the browser. Heavy lifting on the server.</h2>
-            </div>
-            <p>
-              The frontend stays light. Live planning runs through backend routes that call Google Maps Platform, score stops, and return the finished itinerary without exposing the server key.
-            </p>
-          </div>
-
-          <div class="process-grid">
-            <article class="process-card">
-              <span class="step-number">01</span>
-              <h3>Send the trip request</h3>
-              <p>Origin, destination, driving days, fuel interval, and brand preferences go to the planner backend.</p>
-            </article>
-
-            <article class="process-card">
-              <span class="step-number">02</span>
-              <h3>Build the itinerary</h3>
-              <p>The backend calls Routes API and Places API, then applies the route, fuel, and hotel scoring logic.</p>
-            </article>
-
-            <article class="process-card">
-              <span class="step-number">03</span>
-              <h3>Leave with one plan</h3>
-              <p>The browser gets a day-by-day itinerary plus Google Maps, PDF, text, and JSON exports.</p>
-            </article>
-          </div>
-        </section>
-
-        <section class="closing-band">
+        <section class="closing-band closing-band-center">
           <div>
             <div class="eyebrow">Ready when you are</div>
-            <h2>Open the planner and build a route you can actually use.</h2>
+            <h2>Open the planner and build the trip.</h2>
           </div>
 
           <div class="closing-actions">
-            <p>Wayline is designed to feel quiet, predictable, and useful once you are already on the road.</p>
             <div class="cta-row">
               <a class="primary-link" href="./planner/">Open planner</a>
-              <a class="secondary-link" href="./backend/">Backend details</a>
             </div>
           </div>
         </section>
@@ -187,10 +112,7 @@
         </div>
 
         <div class="footer-links">
-          <a href="./how-it-works/">How it works</a>
           <a href="./privacy/">Privacy</a>
-          <a href="./backend/">Backend</a>
-          <a href="./planner/">Planner</a>
         </div>
       </footer>
     </div>
