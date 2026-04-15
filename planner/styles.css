@@ -124,8 +124,7 @@ code {
 .maps-card h4 {
   margin: 0;
   letter-spacing: -0.04em;
-  line-height: 1.02;
-  text-wrap: balance;
+  line-height: 1.08;
 }
 
 .brand-copy-wrap h1 {
@@ -213,7 +212,7 @@ code {
 
 .page-grid {
   display: grid;
-  grid-template-columns: 368px minmax(0, 1fr);
+  grid-template-columns: 424px minmax(0, 1fr);
   min-height: calc(100vh - 68px);
 }
 
@@ -221,7 +220,7 @@ code {
   display: grid;
   align-content: start;
   gap: 26px;
-  padding: 28px;
+  padding: 32px 30px;
   background: var(--sidebar);
   border-right: 1px solid var(--line);
 }
@@ -336,7 +335,7 @@ code {
 }
 
 .workspace {
-  padding: 30px 34px 48px;
+  padding: 36px 42px 56px;
 }
 
 .state-panel,
@@ -347,8 +346,8 @@ code {
 
 .empty-state {
   display: grid;
-  grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
-  gap: 28px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 380px);
+  gap: 56px;
   align-items: start;
   padding: 0;
   background: transparent;
@@ -358,13 +357,15 @@ code {
 
 .empty-copy {
   display: grid;
-  gap: 14px;
+  gap: 16px;
   align-content: start;
+  max-width: 34rem;
 }
 
 .empty-copy h2 {
-  max-width: 10ch;
-  font-size: clamp(2.3rem, 4.4vw, 4rem);
+  max-width: 8ch;
+  font-size: clamp(2.8rem, 5vw, 4.9rem);
+  line-height: 0.98;
 }
 
 .empty-grid,
@@ -380,12 +381,21 @@ code {
 }
 
 .empty-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: 18px;
+  max-width: 380px;
 }
 
 .subcard,
 .maps-card {
-  padding: 22px;
+  padding: 24px;
+}
+
+.subcard h3 {
+  margin: 0 0 16px;
+  font-size: 1.02rem;
+  line-height: 1.28;
 }
 
 .subcard h4,
@@ -413,10 +423,10 @@ code {
 
 .sample-days li {
   display: grid;
-  grid-template-columns: 72px 1fr auto;
-  gap: 14px;
+  grid-template-columns: 64px 1fr auto;
+  gap: 12px;
   align-items: center;
-  padding: 14px 0;
+  padding: 16px 0;
   border-top: 1px solid var(--line);
 }
 
@@ -629,12 +639,24 @@ code {
 }
 
 @media (max-width: 1260px) {
+  .page-grid {
+    grid-template-columns: 380px minmax(0, 1fr);
+  }
+
+  .empty-state {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .empty-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: none;
+  }
+
   .summary-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .empty-state,
-  .empty-grid,
   .maps-grid,
   .lists-grid,
   .day-body {
@@ -681,6 +703,7 @@ code {
   }
 
   .field-grid,
+  .empty-grid,
   .summary-grid,
   .sample-days li,
   .route-list li {

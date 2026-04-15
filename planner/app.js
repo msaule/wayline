@@ -194,6 +194,40 @@ function fillDefaults() {
   elements.hotelBrandsInput.value = defaults.preferredHotelBrands.join(", ");
 }
 
+function applyUrlPrefill() {
+  const url = new URL(window.location.href);
+  const origin = url.searchParams.get("origin");
+  const destination = url.searchParams.get("destination");
+  const gasIntervalMiles = url.searchParams.get("gasIntervalMiles");
+  const drivingDays = url.searchParams.get("drivingDays");
+  const gasBrands = url.searchParams.get("gasBrands");
+  const hotelBrands = url.searchParams.get("hotelBrands");
+
+  if (origin) {
+    elements.originInput.value = origin;
+  }
+
+  if (destination) {
+    elements.destinationInput.value = destination;
+  }
+
+  if (gasIntervalMiles) {
+    elements.gasIntervalInput.value = gasIntervalMiles;
+  }
+
+  if (drivingDays) {
+    elements.daysInput.value = drivingDays;
+  }
+
+  if (gasBrands) {
+    elements.gasBrandsInput.value = gasBrands;
+  }
+
+  if (hotelBrands) {
+    elements.hotelBrandsInput.value = hotelBrands;
+  }
+}
+
 function readFormInput() {
   return {
     origin: elements.originInput.value.trim(),
@@ -582,6 +616,7 @@ async function initialize() {
   state.appState = await bridge.getAppState();
   renderApiStatus();
   fillDefaults();
+  applyUrlPrefill();
   showSection("empty");
 }
 

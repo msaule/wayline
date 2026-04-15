@@ -56,6 +56,7 @@
     },
     runtime: "static-site",
   };
+  const hostedPlannerBaseUrl = "https://wayline.vercel.app/planner/";
 
   function slugify(value) {
     return String(value || "road-trip")
@@ -74,6 +75,36 @@
     }
 
     return payload;
+  }
+
+  function buildHostedPlannerUrl(payload = {}) {
+    const url = new URL(hostedPlannerBaseUrl);
+
+    if (payload.origin) {
+      url.searchParams.set("origin", payload.origin);
+    }
+
+    if (payload.destination) {
+      url.searchParams.set("destination", payload.destination);
+    }
+
+    if (payload.gasStopIntervalMiles) {
+      url.searchParams.set("gasIntervalMiles", String(payload.gasStopIntervalMiles));
+    }
+
+    if (payload.drivingDays) {
+      url.searchParams.set("drivingDays", String(payload.drivingDays));
+    }
+
+    if (Array.isArray(payload.preferredGasBrands) && payload.preferredGasBrands.length) {
+      url.searchParams.set("gasBrands", payload.preferredGasBrands.join(", "));
+    }
+
+    if (Array.isArray(payload.preferredHotelBrands) && payload.preferredHotelBrands.length) {
+      url.searchParams.set("hotelBrands", payload.preferredHotelBrands.join(", "));
+    }
+
+    return url.toString();
   }
 
   function downloadBlob(blob, fileName) {
@@ -138,11 +169,22 @@
 
         throw new Error("Planner backend unavailable.");
       } catch (_error) {
+        if (window.location.hostname.endsWith("github.io")) {
+          window.location.replace(buildHostedPlannerUrl(payload));
+
+          return {
+            ok: false,
+            error: {
+              message: "Opening the live planner.",
+              details: null,
+            },
+          };
+        }
+
         return {
           ok: false,
           error: {
-            message:
-              "This static shell does not include the planning backend. Use the desktop app, run `npm run web`, or deploy the `/api` routes on a host like Vercel.",
+            message: "This preview cannot build trips.",
             details: null,
           },
         };

@@ -46,16 +46,13 @@ code {
 }
 
 .site-shell {
-  width: min(1180px, calc(100% - 40px));
+  width: min(1180px, calc(100% - 56px));
   margin: 0 auto;
-  padding-bottom: 64px;
+  padding: 28px 0 88px;
 }
 
 .site-header,
-.site-footer,
-.section,
 .preview-panel,
-.cta-section,
 .prose-block {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -68,7 +65,6 @@ code {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  margin-top: 24px;
   padding: 18px 22px;
 }
 
@@ -140,16 +136,16 @@ code {
 
 .site-main {
   display: grid;
-  gap: 28px;
-  margin-top: 28px;
+  gap: 72px;
+  margin-top: 52px;
 }
 
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
-  gap: 56px;
+  gap: 72px;
   align-items: center;
-  padding: 72px 8px 28px;
+  padding: 12px 8px 0;
 }
 
 .hero-copy {
@@ -163,8 +159,7 @@ code {
 .cta-section h2 {
   margin: 0;
   letter-spacing: -0.055em;
-  line-height: 0.98;
-  text-wrap: balance;
+  line-height: 1.02;
 }
 
 .hero h1 {
@@ -198,7 +193,7 @@ code {
 .preview-panel {
   display: grid;
   gap: 24px;
-  padding: 26px;
+  padding: 28px 30px;
 }
 
 .preview-header {
@@ -276,15 +271,15 @@ code {
 }
 
 .section {
-  padding: 36px;
+  display: grid;
+  gap: 28px;
+  padding: 0 8px;
 }
 
 .section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 32px;
-  margin-bottom: 28px;
+  display: grid;
+  gap: 10px;
+  max-width: 34rem;
 }
 
 .section-head h1,
@@ -293,23 +288,19 @@ code {
   font-size: clamp(2.1rem, 4.2vw, 3.6rem);
 }
 
-.section-head p {
-  max-width: 36rem;
-}
-
 .section-head-narrow {
-  display: block;
+  max-width: 26rem;
 }
 
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  gap: 24px;
 }
 
 .feature-card,
 .detail-row {
-  padding: 24px;
+  padding: 26px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface-muted);
@@ -325,31 +316,30 @@ code {
 .section-split {
   display: grid;
   grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
-  gap: 32px;
+  gap: 40px;
   align-items: start;
 }
 
 .detail-list {
   display: grid;
-  gap: 16px;
+  gap: 18px;
 }
 
 .cta-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 28px;
-  padding: 32px 36px;
+  display: grid;
+  gap: 18px;
+  padding: 0 8px;
+  justify-items: start;
 }
 
 .content-page {
   display: grid;
-  gap: 24px;
-  padding: 56px 0 8px;
+  gap: 20px;
+  padding: 8px;
 }
 
 .prose-block {
-  padding: 28px;
+  padding: 24px 26px;
 }
 
 .prose-block p + p {
@@ -361,8 +351,8 @@ code {
   justify-content: space-between;
   align-items: center;
   gap: 24px;
-  margin-top: 28px;
-  padding: 20px 22px;
+  margin-top: 72px;
+  padding: 0 8px;
 }
 
 .site-footer strong {
@@ -392,8 +382,8 @@ code {
   .section-head,
   .cta-section,
   .site-footer {
-    flex-direction: column;
-    align-items: flex-start;
+    display: grid;
+    justify-items: start;
   }
 
   .hero h1,
@@ -406,14 +396,11 @@ code {
 
 @media (max-width: 720px) {
   .site-shell {
-    width: min(100% - 20px, 1180px);
+    width: min(100% - 24px, 1180px);
   }
 
   .site-header,
-  .section,
   .preview-panel,
-  .cta-section,
-  .site-footer,
   .prose-block {
     padding: 20px;
   }
@@ -425,7 +412,7 @@ code {
 
   .hero {
     gap: 32px;
-    padding-top: 40px;
+    padding-top: 0;
   }
 
   .preview-days li {
