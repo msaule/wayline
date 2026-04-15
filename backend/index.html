@@ -18,74 +18,56 @@
         <nav class="site-nav">
           <a href="../how-it-works/">How it works</a>
           <a href="../privacy/">Privacy</a>
-          <a class="nav-emphasis" href="./">Backend</a>
-          <a href="../planner/">Open planner</a>
+          <a class="nav-current" href="./">Backend</a>
+          <a class="nav-action" href="../planner/">Open planner</a>
         </nav>
       </header>
 
       <main>
-        <section class="section doc-hero">
-          <div class="eyebrow">Backend</div>
-          <h1>The live planner needs a backend for one reason: the key stays there.</h1>
-          <p>
-            Wayline’s public-facing UI is static, but live trip planning depends on server-side Google Maps calls. The production web app is structured for Vercel so the frontend and API routes can ship together while the Google API key remains in environment variables.
-          </p>
+        <section class="hero hero-page">
+          <div class="hero-copy">
+            <div class="eyebrow">Backend</div>
+            <h1>The browser stays light. The routing work happens on the server.</h1>
+            <p class="hero-summary">
+              Wayline uses a hosted backend because live trip planning depends on Google Maps web services. That keeps the server key out of the client and lets the planner return one finished itinerary instead of a pile of partial data.
+            </p>
+          </div>
         </section>
 
-        <div class="doc-grid">
-          <aside class="toc">
-            <div class="eyebrow">Quick reference</div>
-            <nav>
-              <a href="#apis">Required APIs</a>
-              <a href="#env">Environment</a>
-              <a href="#shape">App shape</a>
-              <a href="#local">Local preview</a>
-            </nav>
-          </aside>
-
-          <div class="doc-stack">
-            <section class="doc-panel" id="apis">
-              <div class="eyebrow">Google Cloud</div>
-              <h2>Required APIs</h2>
-              <ul class="plain-list">
-                <li>Routes API</li>
-                <li>Places API (New)</li>
-              </ul>
-              <p>Those APIs are used for the driving route, gas-stop discovery, and hotel lookups.</p>
-            </section>
-
-            <section class="doc-panel" id="env">
-              <div class="eyebrow">Environment variables</div>
-              <h2>Server-side configuration</h2>
-              <div class="code-block">GOOGLE_MAPS_API_KEY=your_google_maps_key
-GOOGLE_MAPS_REGION=US</div>
-              <p>The key belongs in local <code>.env</code> files or host environment variables only. It should never be committed and never shipped in frontend JavaScript.</p>
-            </section>
-
-            <section class="doc-panel" id="shape">
-              <div class="eyebrow">App shape</div>
-              <h2>Frontend plus API routes</h2>
-              <ul class="plain-list">
-                <li><code>/</code> serves the public product site</li>
-                <li><code>/planner/</code> serves the planner UI</li>
-                <li><code>/api/app-state</code> exposes runtime state</li>
-                <li><code>/api/plan-trip</code> builds the itinerary</li>
-              </ul>
-            </section>
-
-            <section class="doc-panel" id="local">
-              <div class="eyebrow">Local preview</div>
-              <h2>Useful commands</h2>
-              <div class="code-block">npm install
-npm run web
-npm start</div>
-              <p>
-                <code>npm run web</code> starts the local web preview with backend routes. <code>npm start</code> opens the desktop app, which uses the same planning engine against your local environment.
-              </p>
-            </section>
+        <section class="section section-dark">
+          <div class="feature-grid">
+            <article class="feature-card">
+              <div class="mini-label">Required APIs</div>
+              <h3>Google Maps Platform</h3>
+              <p>Routes API and Places API (New) are used for route building, gas-stop discovery, and hotel lookups.</p>
+            </article>
+            <article class="feature-card">
+              <div class="mini-label">Environment</div>
+              <h3>Server-side key only</h3>
+              <p><code>GOOGLE_MAPS_API_KEY</code> and <code>GOOGLE_MAPS_REGION</code> belong in local environment files or hosted environment variables.</p>
+            </article>
+            <article class="feature-card">
+              <div class="mini-label">Hosting</div>
+              <h3>Built for Vercel</h3>
+              <p>The current production shape is a Vercel deployment with a static frontend and API routes shipped together.</p>
+            </article>
           </div>
-        </div>
+        </section>
       </main>
+
+      <footer class="site-footer">
+        <div>
+          <strong>Wayline</strong>
+          <p>Road-trip planning built on live routing and place data.</p>
+        </div>
+
+        <div class="footer-links">
+          <a href="../">Overview</a>
+          <a href="../how-it-works/">How it works</a>
+          <a href="../privacy/">Privacy</a>
+          <a href="../planner/">Planner</a>
+        </div>
+      </footer>
     </div>
   </body>
 </html>

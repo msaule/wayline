@@ -18,16 +18,8 @@
           <img class="brand-mark" src="./assets/wayline-mark.svg" alt="Wayline logo" />
           <div class="brand-copy-wrap">
             <div class="micro-label">Wayline</div>
-            <h1>Full-drive planning, one clean itinerary.</h1>
-            <p class="brand-copy">
-              Choose the route, stop spacing, and brand preferences. Wayline keeps the trip close to the fastest drive, surfaces dependable fuel and hotel options, and hands the final plan back to Google Maps when you are done.
-            </p>
-            <div class="brand-tags">
-              <span>Fastest route first</span>
-              <span>Fuel stops near the route</span>
-              <span>Hotel areas that make sense</span>
-              <span>Maps, PDF, text, and JSON</span>
-            </div>
+            <h1>Trip planner</h1>
+            <p class="brand-copy">Route, fuel, hotels, and Google Maps links in one pass.</p>
           </div>
         </div>
 
@@ -49,8 +41,8 @@
           <section class="panel planner-panel">
             <div class="panel-header-block">
               <div class="micro-label">Trip</div>
-              <h2>Trip settings</h2>
-              <p>Set the route, drive length, and brand preferences. Wayline keeps the plan route-first and avoids unnecessary side trips whenever it can.</p>
+              <h2>Build a drive</h2>
+              <p>Set the route, stop cadence, and brand preferences.</p>
             </div>
 
             <form id="plannerForm" class="planner-form">
@@ -100,8 +92,6 @@
                 <button class="primary-button" id="planButton" type="submit">Build itinerary</button>
                 <button class="secondary-button" id="resetButton" type="button">Reset</button>
               </div>
-
-              <p class="form-footnote">Live planning runs through a backend that keeps the Google Maps key on the server.</p>
             </form>
           </section>
 
@@ -110,39 +100,43 @@
 
         <main class="workspace">
           <section class="state-panel empty-state" id="emptyState">
-            <div class="empty-hero">
-              <div class="empty-copy">
-                <div class="micro-label">Before you go</div>
-                <h3>The route is easy. The stopping plan is the real work.</h3>
+            <div class="intro-panel">
+              <div class="intro-copy">
+                <div class="micro-label">Before you leave</div>
+                <h2>Start with the route. We will organize the rest.</h2>
                 <p>
-                  Wayline handles the parts that usually end up scattered across tabs: splitting the drive into sensible days, keeping fuel stops close to the route, and finding overnight areas with familiar hotel options and easy highway access.
+                  Wayline keeps the trip centered on the drive itself, then fills in fuel stops, overnight hotel areas, and the Google Maps handoff around it.
                 </p>
                 <ul class="plain-list">
-                  <li>Uses live Google Maps route and place data.</li>
-                  <li>Prefers practical stop quality over mathematically perfect spacing.</li>
-                  <li>Exports the finished trip to Maps, PDF, text, and JSON.</li>
+                  <li>Fastest practical route first.</li>
+                  <li>Fuel stops ranked by route fit, chain quality, and reviews.</li>
+                  <li>Overnight areas chosen for hotel usefulness, not just mileage.</li>
                 </ul>
               </div>
 
-              <div class="route-snapshot">
-                <div class="snapshot-line">
+              <div class="intro-preview">
+                <div class="preview-route">
                   <span>Start</span>
                   <span>Night 1</span>
                   <span>Night 2</span>
                   <span>Finish</span>
                 </div>
-                <div class="snapshot-grid">
-                  <article class="feature-card">
-                    <h4>Balanced drive days</h4>
-                    <p>Overnight areas are chosen by route logic and hotel usefulness, not just mileage splits.</p>
+
+                <div class="preview-grid">
+                  <article class="preview-card">
+                    <div class="micro-label">Balanced days</div>
+                    <h3>Long drives feel manageable.</h3>
+                    <p>Stop points are chosen by route logic and overnight usefulness.</p>
                   </article>
-                  <article class="feature-card">
-                    <h4>Smarter fuel windows</h4>
-                    <p>Wayline searches around each target mile so a good stop can beat a bad detour.</p>
+                  <article class="preview-card">
+                    <div class="micro-label">Smarter fuel</div>
+                    <h3>Bad detours get pushed aside.</h3>
+                    <p>Wayline searches around each fuel target window, not one exact mile marker.</p>
                   </article>
-                  <article class="feature-card">
-                    <h4>Clean handoff</h4>
-                    <p>Once the plan looks right, open the full route or each day in Google Maps.</p>
+                  <article class="preview-card">
+                    <div class="micro-label">Clean export</div>
+                    <h3>Maps, PDF, text, and JSON.</h3>
+                    <p>The final itinerary is ready to save or send to your phone.</p>
                   </article>
                 </div>
               </div>
@@ -154,7 +148,7 @@
             <div>
               <div class="micro-label">Working</div>
               <h3>Building the route, stop windows, and overnight options.</h3>
-              <p>Wayline is checking the drive, ranking gas stops, looking for hotel areas, and preparing the Google Maps handoff links.</p>
+              <p>Wayline is checking the drive, scoring gas stops, looking for hotel areas, and preparing the Maps links.</p>
             </div>
           </section>
 
@@ -207,10 +201,10 @@
             <section class="panel formatted-panel">
               <div class="panel-heading">
                 <div>
-                  <div class="micro-label">Text export</div>
-                  <h3>Printable itinerary</h3>
+                  <div class="micro-label">Text</div>
+                  <h3>Full itinerary</h3>
                 </div>
-                <span>Useful for offline notes, glovebox copies, or a clean handoff.</span>
+                <span>Useful for printing, notes, or offline reference.</span>
               </div>
               <pre id="formattedItinerary"></pre>
             </section>
