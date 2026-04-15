@@ -1,0 +1,286 @@
+:root {
+  --paper: #fffdf9;
+  --ink: #24313a;
+  --muted: #5f6b74;
+  --line: #e1d7c8;
+  --green: #21685f;
+  --road: #c9853b;
+  --panel: #fbf7ef;
+  --font-body: "Segoe UI Variable Text", "Segoe UI", "Aptos", sans-serif;
+  --font-mono: "Cascadia Code", "Consolas", "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: #f3ede2;
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+body {
+  padding: 20px;
+}
+
+.print-toolbar {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  max-width: 960px;
+  margin: 0 auto 14px;
+}
+
+.print-toolbar button {
+  min-height: 42px;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.print-shell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--paper);
+}
+
+.print-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  color: var(--green);
+  font-weight: 800;
+}
+
+.brand-mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  background: var(--green);
+  position: relative;
+}
+
+.brand-mark::before {
+  content: "";
+  position: absolute;
+  inset: 9px 4px 9px 4px;
+  border-radius: 999px;
+  background: #f8f4ec;
+  transform: rotate(-46deg);
+}
+
+.brand-mark::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--road);
+}
+
+.micro {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  color: var(--road);
+}
+
+.print-head h1,
+.section h2,
+.day-card h3 {
+  margin: 0;
+}
+
+.print-head h1 {
+  font-size: 2rem;
+  line-height: 1.08;
+}
+
+.print-head p,
+.meta,
+.metric-card p,
+.day-card p,
+.list-item p,
+.empty-note {
+  color: var(--muted);
+  line-height: 1.58;
+}
+
+.plain-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.58;
+}
+
+.summary-grid,
+.day-grid,
+.lists-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.metric-card,
+.day-card,
+.section-panel,
+.list-item {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+}
+
+.metric-card {
+  padding: 14px;
+}
+
+.metric-card strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.35rem;
+}
+
+.section {
+  margin-top: 22px;
+}
+
+.section h2 {
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+}
+
+.day-card {
+  padding: 18px;
+  page-break-inside: avoid;
+}
+
+.day-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.day-route {
+  margin-top: 6px;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  font-weight: 700;
+}
+
+.day-grid,
+.lists-grid {
+  margin-top: 14px;
+}
+
+.day-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.section-panel {
+  padding: 14px;
+}
+
+.section-panel h4 {
+  margin: 0 0 10px;
+}
+
+.list-item {
+  padding: 12px 13px;
+}
+
+.list-item + .list-item {
+  margin-top: 10px;
+}
+
+.list-item strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.lists-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.mono-block {
+  margin: 0;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: #fcfaf5;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+@page {
+  size: Letter;
+  margin: 0.55in;
+}
+
+@media print {
+  html,
+  body {
+    background: white;
+  }
+
+  body {
+    padding: 0;
+  }
+
+  .print-toolbar {
+    display: none;
+  }
+
+  .print-shell {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: white;
+  }
+}

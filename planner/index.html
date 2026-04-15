@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:;"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wayline</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/wayline-mark.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <img class="brand-mark" src="./assets/wayline-mark.svg" alt="Wayline logo" />
+          <div class="brand-copy-wrap">
+            <div class="micro-label">Wayline</div>
+            <h1>Full-drive planning, one clean itinerary.</h1>
+            <p class="brand-copy">
+              Choose the route, stop spacing, and brand preferences. Wayline keeps the trip close to the fastest drive, surfaces dependable fuel and hotel options, and hands the final plan back to Google Maps when you are done.
+            </p>
+            <div class="brand-tags">
+              <span>Fastest route first</span>
+              <span>Fuel stops near the route</span>
+              <span>Hotel areas that make sense</span>
+              <span>Maps, PDF, text, and JSON</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="topbar-side">
+          <span class="runtime-pill" id="runtimePill">Desktop app</span>
+          <div class="toolbar">
+            <button class="toolbar-button" id="showEnvButton" type="button">Backend</button>
+            <button class="toolbar-button" id="openMapsButton" type="button" disabled>Open Maps</button>
+            <button class="toolbar-button" id="copyButton" type="button" disabled>Copy</button>
+            <button class="toolbar-button" id="savePdfButton" type="button" disabled>PDF</button>
+            <button class="toolbar-button" id="saveTextButton" type="button" disabled>Text</button>
+            <button class="toolbar-button" id="saveJsonButton" type="button" disabled>JSON</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-grid">
+        <aside class="sidebar">
+          <section class="panel planner-panel">
+            <div class="panel-header-block">
+              <div class="micro-label">Trip</div>
+              <h2>Trip settings</h2>
+              <p>Set the route, drive length, and brand preferences. Wayline keeps the plan route-first and avoids unnecessary side trips whenever it can.</p>
+            </div>
+
+            <form id="plannerForm" class="planner-form">
+              <label class="field">
+                <span>Origin</span>
+                <input id="originInput" name="origin" type="text" required />
+              </label>
+
+              <label class="field">
+                <span>Destination</span>
+                <input id="destinationInput" name="destination" type="text" required />
+              </label>
+
+              <div class="field-grid">
+                <label class="field">
+                  <span>Fuel interval</span>
+                  <input id="gasIntervalInput" name="gasInterval" type="number" min="100" max="600" step="1" required />
+                </label>
+
+                <label class="field">
+                  <span>Driving days</span>
+                  <input id="daysInput" name="days" type="number" min="2" max="7" step="1" required />
+                </label>
+              </div>
+
+              <label class="field">
+                <span>Preferred gas brands</span>
+                <textarea
+                  id="gasBrandsInput"
+                  name="gasBrands"
+                  rows="6"
+                  placeholder="Love's, Pilot, Flying J, Shell"
+                ></textarea>
+              </label>
+
+              <label class="field">
+                <span>Preferred hotel brands</span>
+                <textarea
+                  id="hotelBrandsInput"
+                  name="hotelBrands"
+                  rows="6"
+                  placeholder="Hampton Inn, Holiday Inn Express, Fairfield Inn"
+                ></textarea>
+              </label>
+
+              <div class="form-actions">
+                <button class="primary-button" id="planButton" type="submit">Build itinerary</button>
+                <button class="secondary-button" id="resetButton" type="button">Reset</button>
+              </div>
+
+              <p class="form-footnote">Live planning runs through a backend that keeps the Google Maps key on the server.</p>
+            </form>
+          </section>
+
+          <section class="panel status-panel" id="apiStatusCard"></section>
+        </aside>
+
+        <main class="workspace">
+          <section class="state-panel empty-state" id="emptyState">
+            <div class="empty-hero">
+              <div class="empty-copy">
+                <div class="micro-label">Before you go</div>
+                <h3>The route is easy. The stopping plan is the real work.</h3>
+                <p>
+                  Wayline handles the parts that usually end up scattered across tabs: splitting the drive into sensible days, keeping fuel stops close to the route, and finding overnight areas with familiar hotel options and easy highway access.
+                </p>
+                <ul class="plain-list">
+                  <li>Uses live Google Maps route and place data.</li>
+                  <li>Prefers practical stop quality over mathematically perfect spacing.</li>
+                  <li>Exports the finished trip to Maps, PDF, text, and JSON.</li>
+                </ul>
+              </div>
+
+              <div class="route-snapshot">
+                <div class="snapshot-line">
+                  <span>Start</span>
+                  <span>Night 1</span>
+                  <span>Night 2</span>
+                  <span>Finish</span>
+                </div>
+                <div class="snapshot-grid">
+                  <article class="feature-card">
+                    <h4>Balanced drive days</h4>
+                    <p>Overnight areas are chosen by route logic and hotel usefulness, not just mileage splits.</p>
+                  </article>
+                  <article class="feature-card">
+                    <h4>Smarter fuel windows</h4>
+                    <p>Wayline searches around each target mile so a good stop can beat a bad detour.</p>
+                  </article>
+                  <article class="feature-card">
+                    <h4>Clean handoff</h4>
+                    <p>Once the plan looks right, open the full route or each day in Google Maps.</p>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="state-panel loading-state hidden" id="loadingState">
+            <div class="loader-mark"></div>
+            <div>
+              <div class="micro-label">Working</div>
+              <h3>Building the route, stop windows, and overnight options.</h3>
+              <p>Wayline is checking the drive, ranking gas stops, looking for hotel areas, and preparing the Google Maps handoff links.</p>
+            </div>
+          </section>
+
+          <section class="state-panel error-state hidden" id="errorState">
+            <div class="micro-label">Problem</div>
+            <h3>Couldn’t build the trip yet.</h3>
+            <p id="errorMessage"></p>
+            <pre id="errorDetails" class="error-details hidden"></pre>
+          </section>
+
+          <section class="result-shell hidden" id="resultState">
+            <section class="panel route-hero" id="routeRibbon"></section>
+            <section class="summary-grid" id="summaryGrid"></section>
+            <section class="panel journey-rail" id="journeyRail"></section>
+            <section class="panel maps-panel" id="mapsPanel"></section>
+            <section class="days-grid" id="daysGrid"></section>
+
+            <div class="lists-grid">
+              <section class="panel list-panel">
+                <div class="panel-heading">
+                  <div>
+                    <div class="micro-label">Fuel</div>
+                    <h3>Fuel stops</h3>
+                  </div>
+                </div>
+                <div id="allGasStops"></div>
+              </section>
+
+              <section class="panel list-panel">
+                <div class="panel-heading">
+                  <div>
+                    <div class="micro-label">Hotels</div>
+                    <h3>Overnight areas</h3>
+                  </div>
+                </div>
+                <div id="overnightStops"></div>
+              </section>
+            </div>
+
+            <section class="panel list-panel">
+              <div class="panel-heading">
+                <div>
+                  <div class="micro-label">Notes</div>
+                  <h3>Caveats</h3>
+                </div>
+              </div>
+              <div id="caveatsList"></div>
+            </section>
+
+            <section class="panel formatted-panel">
+              <div class="panel-heading">
+                <div>
+                  <div class="micro-label">Text export</div>
+                  <h3>Printable itinerary</h3>
+                </div>
+                <span>Useful for offline notes, glovebox copies, or a clean handoff.</span>
+              </div>
+              <pre id="formattedItinerary"></pre>
+            </section>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="./platform-bridge.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

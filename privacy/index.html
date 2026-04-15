@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wayline Privacy</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/wayline-mark.svg" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="../">
+          <img src="../assets/wayline-mark.svg" alt="Wayline logo" />
+          <span>Wayline</span>
+        </a>
+
+        <nav class="site-nav">
+          <a href="../how-it-works/">How it works</a>
+          <a class="nav-emphasis" href="./">Privacy</a>
+          <a href="../backend/">Backend</a>
+          <a href="../planner/">Open planner</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="section doc-hero">
+          <div class="eyebrow">Privacy</div>
+          <h1>Clear about what the app sends and what it does not keep.</h1>
+          <p>
+            The current version of Wayline is a trip-planning service, not an account system. It builds itineraries from the trip details you enter and returns the result directly to the browser or desktop app.
+          </p>
+        </section>
+
+        <div class="card-grid split" style="margin-top: 18px">
+          <article class="info-card">
+            <h3>What you enter</h3>
+            <p>Origin, destination, driving days, fuel interval, and brand preferences are sent to the planner backend when you build a trip.</p>
+          </article>
+
+          <article class="info-card">
+            <h3>What the backend does</h3>
+            <p>The backend uses that request to call Google Routes API and Places API and then returns the finished itinerary to you.</p>
+          </article>
+        </div>
+
+        <section class="section">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Current behavior</div>
+              <h2>No saved accounts, no built-in trip history.</h2>
+            </div>
+            <p>
+              The current app does not include sign-in, a saved-trips feature, or a user profile. If that changes later, the product copy and privacy page should be updated to match the actual behavior.
+            </p>
+          </div>
+
+          <div class="card-grid three-up">
+            <article class="info-card">
+              <h3>Browser exports</h3>
+              <p>PDF, text, and JSON exports are generated for you to save locally.</p>
+            </article>
+            <article class="info-card">
+              <h3>Hosting logs</h3>
+              <p>Like most web services, the hosting platform may keep standard request logs. If you run Wayline locally or on your own infrastructure, that depends on your environment.</p>
+            </article>
+            <article class="info-card">
+              <h3>Google Maps data</h3>
+              <p>Trip planning depends on Google Maps Platform responses for routes and places. Their services process the route and search lookups needed to produce the itinerary.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

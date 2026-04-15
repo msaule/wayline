@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How Wayline Works</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/wayline-mark.svg" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="../">
+          <img src="../assets/wayline-mark.svg" alt="Wayline logo" />
+          <span>Wayline</span>
+        </a>
+
+        <nav class="site-nav">
+          <a class="nav-emphasis" href="./">How it works</a>
+          <a href="../privacy/">Privacy</a>
+          <a href="../backend/">Backend</a>
+          <a href="../planner/">Open planner</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="section doc-hero">
+          <div class="eyebrow">How it works</div>
+          <h1>One trip request in. One finished itinerary out.</h1>
+          <p>
+            Wayline combines routing, stop planning, hotel-area selection, and export links into one flow. The goal is to turn a long drive into a plan you can actually use without juggling tabs and notes.
+          </p>
+          <div class="doc-actions">
+            <a class="primary-link" href="../planner/">Open planner</a>
+            <a class="secondary-link" href="../backend/">Backend details</a>
+          </div>
+        </section>
+
+        <div class="doc-grid">
+          <aside class="toc">
+            <div class="eyebrow">On this page</div>
+            <nav>
+              <a href="#route">1. Route</a>
+              <a href="#days">2. Driving days</a>
+              <a href="#fuel">3. Fuel planning</a>
+              <a href="#hotels">4. Hotel areas</a>
+              <a href="#exports">5. Exports</a>
+              <a href="#backend">6. Backend flow</a>
+            </nav>
+          </aside>
+
+          <div class="doc-stack">
+            <section class="doc-panel" id="route">
+              <div class="eyebrow">Step 1</div>
+              <h2>Find the fastest practical route</h2>
+              <p>
+                Wayline starts with Google Routes API to get the primary driving route, total distance, duration, and route geometry. That route becomes the backbone for everything else.
+              </p>
+            </section>
+
+            <section class="doc-panel" id="days">
+              <div class="eyebrow">Step 2</div>
+              <h2>Split the trip into normal driving days</h2>
+              <p>
+                Overnight stops are chosen by route progression and driving balance, not raw distance alone. The planner tries to avoid awkward late-night endpoints in tiny towns when a better hotel cluster is still on the route.
+              </p>
+            </section>
+
+            <section class="doc-panel" id="fuel">
+              <div class="eyebrow">Step 3</div>
+              <h2>Look for fuel within a route window</h2>
+              <p>
+                Instead of searching only at one exact mile target, Wayline looks around that target window and scores fuel stops by major chain preference, ratings, review count, and distance off the route. That makes it much less likely to pick a mathematically tidy but annoying detour.
+              </p>
+            </section>
+
+            <section class="doc-panel" id="hotels">
+              <div class="eyebrow">Step 4</div>
+              <h2>Rank hotels in the overnight area</h2>
+              <p>
+                For each overnight stop, Wayline looks for mainstream hotel brands with strong ratings near the route. The goal is a normal late-arrival stop with food, parking, and easy access back to the highway the next morning.
+              </p>
+            </section>
+
+            <section class="doc-panel" id="exports">
+              <div class="eyebrow">Step 5</div>
+              <h2>Return one clean itinerary</h2>
+              <p>Each trip includes:</p>
+              <ul class="plain-list">
+                <li>a readable day-by-day itinerary</li>
+                <li>ordered fuel stops</li>
+                <li>overnight hotel picks</li>
+                <li>a full-route Google Maps link</li>
+                <li>day-by-day Google Maps links</li>
+                <li>PDF, text, and JSON exports</li>
+              </ul>
+            </section>
+
+            <section class="doc-panel" id="backend">
+              <div class="eyebrow">Step 6</div>
+              <h2>Keep Google Maps keys server-side</h2>
+              <p>
+                The live planner sends your request to backend routes. Those routes call Google Maps Platform and return the finished result. The browser does not need the Google API key, which is why the production web app is set up for a host like Vercel rather than a static-only deployment.
+              </p>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

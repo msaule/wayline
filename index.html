@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wayline</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/wayline-mark.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="./">
+          <img src="./assets/wayline-mark.svg" alt="Wayline logo" />
+          <span>Wayline</span>
+        </a>
+
+        <nav class="site-nav">
+          <a href="./how-it-works/">How it works</a>
+          <a href="./privacy/">Privacy</a>
+          <a href="./backend/">Backend</a>
+          <a class="nav-emphasis" href="./planner/">Open planner</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow">Road trip planning</div>
+            <h1>Plan the whole drive before you leave.</h1>
+            <p>
+              Wayline builds a complete long-distance driving plan around the fastest route, dependable fuel stops, sensible overnight hotel areas, and a clean Google Maps handoff.
+            </p>
+
+            <div class="cta-row">
+              <a class="primary-link" href="./planner/">Open planner</a>
+              <a class="secondary-link" href="./how-it-works/">See how it works</a>
+            </div>
+
+            <div class="tag-row">
+              <span>Fastest route first</span>
+              <span>Fuel stops close to the route</span>
+              <span>Hotel clusters that make sense</span>
+              <span>Google Maps, PDF, text, and JSON</span>
+            </div>
+          </div>
+
+          <aside class="hero-panel">
+            <div class="mini-board">
+              <div class="mini-label-row">
+                <div>
+                  <div class="mini-label">Example trip</div>
+                  <h2>Las Vegas to Greensboro</h2>
+                </div>
+                <span class="mini-pill">3 driving days</span>
+              </div>
+
+              <div class="route-strip">
+                <div class="route-stop">
+                  <span>Start</span>
+                  <strong>Las Vegas</strong>
+                </div>
+                <div class="route-connector"></div>
+                <div class="route-stop">
+                  <span>Night 1</span>
+                  <strong>Tucumcari</strong>
+                </div>
+                <div class="route-connector"></div>
+                <div class="route-stop">
+                  <span>Night 2</span>
+                  <strong>Forrest City</strong>
+                </div>
+                <div class="route-connector"></div>
+                <div class="route-stop">
+                  <span>Finish</span>
+                  <strong>Greensboro</strong>
+                </div>
+              </div>
+
+              <div class="mini-grid">
+                <article>
+                  <div class="mini-label">Drive time</div>
+                  <strong>32h 46m</strong>
+                  <p>Keeps the route interstate-heavy whenever possible.</p>
+                </article>
+                <article>
+                  <div class="mini-label">Fuel plan</div>
+                  <strong>Every 300 miles</strong>
+                  <p>Ranks stations by chain quality, reviews, and detour distance.</p>
+                </article>
+                <article>
+                  <div class="mini-label">Overnights</div>
+                  <strong>Hotel-rich areas</strong>
+                  <p>Prefers normal stopping cities with chain hotels and food nearby.</p>
+                </article>
+              </div>
+
+              <div class="hero-note">
+                Wayline runs through a backend so the Google Maps key stays on the server, not in the browser.
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">What it handles</div>
+              <h2>The parts people usually end up doing by hand.</h2>
+            </div>
+            <p>
+              Wayline is built for long drives where directions alone are not enough. It plans the route, the stop cadence, the hotel areas, and the exports together so the final itinerary feels usable on the road.
+            </p>
+          </div>
+
+          <div class="card-grid four-up">
+            <article class="info-card">
+              <h3>Route-first planning</h3>
+              <p>Starts with the fastest practical driving route and keeps later choices close to that path.</p>
+            </article>
+            <article class="info-card">
+              <h3>Better fuel spacing</h3>
+              <p>Looks around each fuel target window so a slightly early stop can beat a bad detour later.</p>
+            </article>
+            <article class="info-card">
+              <h3>Normal overnight stops</h3>
+              <p>Favors metro-adjacent hotel areas with familiar brands, food, and late-arrival convenience.</p>
+            </article>
+            <article class="info-card">
+              <h3>Clean handoff</h3>
+              <p>Exports the finished plan to Google Maps, PDF, plain text, and JSON without made-up data.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Built for the road</div>
+              <h2>Practical choices beat perfect math.</h2>
+            </div>
+            <p>
+              Exact mileage spacing is less important than keeping the trip smooth. Wayline prefers the stop that feels normal at highway speed, not the one that wins on a spreadsheet and costs half an hour in detours.
+            </p>
+          </div>
+
+          <div class="card-grid split">
+            <article class="info-card">
+              <h3>Fuel stops</h3>
+              <ul class="plain-list">
+                <li>Searches within a window around each target mile instead of one exact point.</li>
+                <li>Scores major chains, ratings, review count, and distance off the route together.</li>
+                <li>Flags sparse stretches instead of hiding them.</li>
+              </ul>
+            </article>
+
+            <article class="info-card">
+              <h3>Hotel areas</h3>
+              <ul class="plain-list">
+                <li>Splits the trip by driving balance and route logic, not raw distance alone.</li>
+                <li>Looks for areas with chain hotel density and easier interstate access.</li>
+                <li>Keeps the final day clean instead of forcing a late awkward stop.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Service design</div>
+              <h2>Clear about what happens in the browser and what happens on the server.</h2>
+            </div>
+            <p>
+              The product site and planner UI are static frontends. Live trip planning happens through backend routes that call Google Maps Platform. That is how the Google API key stays out of the client.
+            </p>
+          </div>
+
+          <div class="card-grid three-up">
+            <article class="info-card">
+              <h3>Browser</h3>
+              <p>The browser sends your trip request, shows the itinerary, and handles exports like print, text, and JSON.</p>
+            </article>
+            <article class="info-card">
+              <h3>Backend</h3>
+              <p>The backend calls Routes API and Places API, applies the stop-ranking logic, and returns the finished itinerary.</p>
+            </article>
+            <article class="info-card">
+              <h3>Hosting</h3>
+              <p>The live web app is set up for Vercel so the frontend and API routes can ship together with server-side environment variables.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="quote-panel">
+          <div class="quote-grid">
+            <div>
+              <div class="eyebrow">Ready to try it</div>
+              <h2>Use the planner, review the trip, and send each day to Google Maps.</h2>
+            </div>
+
+            <div class="quote-actions">
+              <p>
+                Wayline is designed to feel calm and dependable: one route, one plan, one set of exports you can actually use once you are on the road.
+              </p>
+              <div class="cta-row">
+                <a class="primary-link" href="./planner/">Open planner</a>
+                <a class="secondary-link" href="./backend/">Backend details</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div>
+          <strong>Wayline</strong>
+          <p>Road-trip planning built around real routes, real stops, and a server-side Google Maps integration.</p>
+        </div>
+
+        <div class="footer-links">
+          <a href="./how-it-works/">How it works</a>
+          <a href="./privacy/">Privacy</a>
+          <a href="./backend/">Backend</a>
+          <a href="./planner/">Planner</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
