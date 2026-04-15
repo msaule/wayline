@@ -14,19 +14,18 @@
   <body>
     <div class="app-shell">
       <header class="topbar">
-        <div class="brand-lockup">
+        <a class="brand-link" href="../">
           <img class="brand-mark" src="./assets/wayline-mark.svg" alt="Wayline logo" />
           <div class="brand-copy-wrap">
-            <div class="micro-label">Wayline</div>
-            <h1>Trip planner</h1>
-            <p class="brand-copy">Route, fuel, hotels, and Google Maps links in one pass.</p>
+            <h1>Wayline</h1>
+            <p class="brand-copy">Trip planner</p>
           </div>
-        </div>
+        </a>
 
         <div class="topbar-side">
           <span class="runtime-pill" id="runtimePill">Desktop app</span>
           <div class="toolbar">
-            <button class="toolbar-button" id="openMapsButton" type="button" disabled>Open Maps</button>
+            <button class="toolbar-button" id="openMapsButton" type="button" disabled>Maps</button>
             <button class="toolbar-button" id="copyButton" type="button" disabled>Copy</button>
             <button class="toolbar-button" id="savePdfButton" type="button" disabled>PDF</button>
             <button class="toolbar-button" id="saveTextButton" type="button" disabled>Text</button>
@@ -37,122 +36,113 @@
 
       <div class="page-grid">
         <aside class="sidebar">
-          <section class="panel planner-panel">
-            <div class="panel-header-block">
-              <div class="micro-label">Trip</div>
-              <h2>Build a drive</h2>
-              <p>Set the route, stop cadence, and brand preferences.</p>
+          <div class="sidebar-header">
+            <h2>Plan a drive</h2>
+            <p>Set the route, stop spacing, and preferred brands.</p>
+          </div>
+
+          <form id="plannerForm" class="planner-form">
+            <label class="field">
+              <span>Origin</span>
+              <input id="originInput" name="origin" type="text" required />
+            </label>
+
+            <label class="field">
+              <span>Destination</span>
+              <input id="destinationInput" name="destination" type="text" required />
+            </label>
+
+            <div class="field-grid">
+              <label class="field">
+                <span>Fuel interval</span>
+                <input id="gasIntervalInput" name="gasInterval" type="number" min="100" max="600" step="1" required />
+              </label>
+
+              <label class="field">
+                <span>Driving days</span>
+                <input id="daysInput" name="days" type="number" min="2" max="7" step="1" required />
+              </label>
             </div>
 
-            <form id="plannerForm" class="planner-form">
-              <label class="field">
-                <span>Origin</span>
-                <input id="originInput" name="origin" type="text" required />
-              </label>
+            <label class="field">
+              <span>Preferred gas brands</span>
+              <textarea
+                id="gasBrandsInput"
+                name="gasBrands"
+                rows="5"
+                placeholder="Love's, Pilot, Flying J, Shell"
+              ></textarea>
+            </label>
 
-              <label class="field">
-                <span>Destination</span>
-                <input id="destinationInput" name="destination" type="text" required />
-              </label>
+            <label class="field">
+              <span>Preferred hotel brands</span>
+              <textarea
+                id="hotelBrandsInput"
+                name="hotelBrands"
+                rows="5"
+                placeholder="Hampton Inn, Holiday Inn Express, Fairfield Inn"
+              ></textarea>
+            </label>
 
-              <div class="field-grid">
-                <label class="field">
-                  <span>Fuel interval</span>
-                  <input id="gasIntervalInput" name="gasInterval" type="number" min="100" max="600" step="1" required />
-                </label>
+            <div class="form-actions">
+              <button class="primary-button" id="planButton" type="submit">Build itinerary</button>
+              <button class="secondary-button" id="resetButton" type="button">Reset</button>
+            </div>
+          </form>
 
-                <label class="field">
-                  <span>Driving days</span>
-                  <input id="daysInput" name="days" type="number" min="2" max="7" step="1" required />
-                </label>
-              </div>
-
-              <label class="field">
-                <span>Preferred gas brands</span>
-                <textarea
-                  id="gasBrandsInput"
-                  name="gasBrands"
-                  rows="6"
-                  placeholder="Love's, Pilot, Flying J, Shell"
-                ></textarea>
-              </label>
-
-              <label class="field">
-                <span>Preferred hotel brands</span>
-                <textarea
-                  id="hotelBrandsInput"
-                  name="hotelBrands"
-                  rows="6"
-                  placeholder="Hampton Inn, Holiday Inn Express, Fairfield Inn"
-                ></textarea>
-              </label>
-
-              <div class="form-actions">
-                <button class="primary-button" id="planButton" type="submit">Build itinerary</button>
-                <button class="secondary-button" id="resetButton" type="button">Reset</button>
-              </div>
-            </form>
-          </section>
-
-          <section class="panel status-panel" id="apiStatusCard"></section>
+          <section class="status-panel" id="apiStatusCard"></section>
         </aside>
 
         <main class="workspace">
           <section class="state-panel empty-state" id="emptyState">
-            <div class="intro-panel">
-              <div class="intro-copy">
-              <div class="micro-label">Before you leave</div>
-              <h2>Start with the route. We will organize the rest.</h2>
-              <p>
-                  Wayline keeps the trip centered on the drive itself, then fills in fuel stops, overnight hotel areas, and the final itinerary around it.
-                </p>
+            <div class="empty-copy">
+              <h2>Plan the route first.</h2>
+              <p>Wayline turns a long drive into a route, fuel plan, hotel plan, and finished itinerary.</p>
+            </div>
+
+            <div class="empty-grid">
+              <section class="subcard">
+                <h3>What it builds</h3>
                 <ul class="plain-list">
-                  <li>Fastest practical route first.</li>
-                  <li>Fuel stops ranked by route fit, chain quality, and reviews.</li>
-                  <li>Overnight areas chosen for hotel usefulness, not just mileage.</li>
+                  <li>The fastest practical route first.</li>
+                  <li>Fuel stops that stay close to the drive.</li>
+                  <li>Overnight areas chosen for hotel usefulness.</li>
+                  <li>Google Maps links plus PDF, text, and JSON exports.</li>
                 </ul>
-              </div>
+              </section>
 
-              <div class="intro-preview">
-                <div class="preview-route">
-                  <span>Start</span>
-                  <span>Night 1</span>
-                  <span>Night 2</span>
-                  <span>Finish</span>
-                </div>
-
-                <div class="preview-grid">
-                  <article class="preview-card">
-                    <div class="micro-label">Balanced days</div>
-                    <h3>Long drives feel manageable.</h3>
-                    <p>Stop points are chosen by route logic and overnight usefulness.</p>
-                  </article>
-                  <article class="preview-card">
-                    <div class="micro-label">Smarter fuel</div>
-                    <h3>Bad detours get pushed aside.</h3>
-                    <p>Wayline searches around each fuel target window, not one exact mile marker.</p>
-                  </article>
-                  <article class="preview-card">
-                    <div class="micro-label">Clean export</div>
-                    <h3>Maps, PDF, text, and JSON.</h3>
-                    <p>The final itinerary is ready to save or send to your phone.</p>
-                  </article>
-                </div>
-              </div>
+              <section class="subcard">
+                <h3>Example trip</h3>
+                <ol class="sample-days">
+                  <li>
+                    <span>Day 1</span>
+                    <strong>Tucumcari, NM</strong>
+                    <span>752 mi</span>
+                  </li>
+                  <li>
+                    <span>Day 2</span>
+                    <strong>Forrest City, AR</strong>
+                    <span>781 mi</span>
+                  </li>
+                  <li>
+                    <span>Day 3</span>
+                    <strong>Greensboro, NC</strong>
+                    <span>723 mi</span>
+                  </li>
+                </ol>
+              </section>
             </div>
           </section>
 
           <section class="state-panel loading-state hidden" id="loadingState">
-            <div class="loader-mark"></div>
+            <div class="loader-mark" aria-hidden="true"></div>
             <div>
-              <div class="micro-label">Working</div>
-              <h3>Building the route, stop windows, and overnight options.</h3>
-              <p>Wayline is checking the drive, scoring gas stops, looking for hotel areas, and preparing the Maps links.</p>
+              <h3>Building the trip</h3>
+              <p>Checking the route, fuel stops, hotel options, and Maps links.</p>
             </div>
           </section>
 
           <section class="state-panel error-state hidden" id="errorState">
-            <div class="micro-label">Problem</div>
             <h3>Couldn’t build the trip yet.</h3>
             <p id="errorMessage"></p>
             <pre id="errorDetails" class="error-details hidden"></pre>
@@ -167,43 +157,33 @@
 
             <div class="lists-grid">
               <section class="panel list-panel">
-                <div class="panel-heading">
-                  <div>
-                    <div class="micro-label">Fuel</div>
-                    <h3>Fuel stops</h3>
-                  </div>
+                <div class="section-row">
+                  <h3>Fuel stops</h3>
                 </div>
                 <div id="allGasStops"></div>
               </section>
 
               <section class="panel list-panel">
-                <div class="panel-heading">
-                  <div>
-                    <div class="micro-label">Hotels</div>
-                    <h3>Overnight areas</h3>
-                  </div>
+                <div class="section-row">
+                  <h3>Overnight areas</h3>
                 </div>
                 <div id="overnightStops"></div>
               </section>
             </div>
 
             <section class="panel list-panel">
-              <div class="panel-heading">
-                <div>
-                  <div class="micro-label">Notes</div>
-                  <h3>Caveats</h3>
-                </div>
+              <div class="section-row">
+                <h3>Notes</h3>
               </div>
               <div id="caveatsList"></div>
             </section>
 
-              <section class="panel formatted-panel">
-              <div class="panel-heading">
+            <section class="panel formatted-panel">
+              <div class="section-row">
                 <div>
-                  <div class="micro-label">Text</div>
                   <h3>Full itinerary</h3>
+                  <p class="panel-note">Useful for printing, notes, or offline reference.</p>
                 </div>
-                <span>Useful for printing, notes, or offline reference.</span>
               </div>
               <pre id="formattedItinerary"></pre>
             </section>

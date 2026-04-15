@@ -12,107 +12,139 @@
       <header class="site-header">
         <a class="brand" href="./">
           <img src="./assets/wayline-mark.svg" alt="Wayline logo" />
-          <span>Wayline</span>
+          <div class="brand-copy">
+            <strong>Wayline</strong>
+            <span>Trip planner</span>
+          </div>
         </a>
 
         <nav class="site-nav">
-          <a class="nav-action" href="./planner/">Open planner</a>
+          <a href="./privacy/">Privacy</a>
+          <a class="button button-primary" href="./planner/">Open planner</a>
         </nav>
       </header>
 
-      <main>
-        <section class="hero hero-home">
-          <div class="hero-copy hero-copy-center">
-            <div class="eyebrow">Road trip planning</div>
-            <h1>Build the whole drive before you leave.</h1>
-            <p class="hero-summary">
-              Route, fuel stops, overnight hotel picks, and Google Maps links in one clean itinerary.
+      <main class="site-main">
+        <section class="hero">
+          <div class="hero-copy">
+            <h1>Plan the whole drive before you leave.</h1>
+            <p>
+              Wayline builds the route, fuel stops, overnight hotel picks, and Google Maps links in one itinerary.
             </p>
-
-            <div class="cta-row">
-              <a class="primary-link" href="./planner/">Open planner</a>
+            <div class="hero-actions">
+              <a class="button button-primary" href="./planner/">Open planner</a>
             </div>
           </div>
 
-          <div class="showcase-window">
-            <div class="showcase-grid showcase-grid-simple">
-              <section class="showcase-summary">
-                <div class="mini-label">Example trip</div>
-                <h2>Las Vegas to Greensboro</h2>
-                <p>Fastest practical route, two overnight stops, seven fuel stops, and a finished plan ready for the road.</p>
-
-                <div class="metric-row">
-                  <div>
-                    <span class="metric-kicker">Drive time</span>
-                    <strong>32h 46m</strong>
-                  </div>
-                  <div>
-                    <span class="metric-kicker">Driving days</span>
-                    <strong>3 days</strong>
-                  </div>
-                  <div>
-                    <span class="metric-kicker">Fuel spacing</span>
-                    <strong>300 miles</strong>
-                  </div>
-                </div>
-              </section>
-
-              <section class="showcase-route">
-                <div class="route-pill-row">
-                  <span>Las Vegas</span>
-                  <span>Tucumcari</span>
-                  <span>Forrest City</span>
-                  <span>Greensboro</span>
-                </div>
-              </section>
+          <section class="preview-panel" aria-label="Example trip">
+            <div class="preview-header">
+              <div>
+                <strong>Example trip</strong>
+                <p>Las Vegas, Nevada to Greensboro, North Carolina</p>
+              </div>
+              <span>3 driving days</span>
             </div>
-          </div>
+
+            <dl class="preview-stats">
+              <div>
+                <dt>Total distance</dt>
+                <dd>2,256 mi</dd>
+              </div>
+              <div>
+                <dt>Drive time</dt>
+                <dd>32h 46m</dd>
+              </div>
+              <div>
+                <dt>Fuel stops</dt>
+                <dd>7 planned</dd>
+              </div>
+            </dl>
+
+            <ol class="preview-days">
+              <li>
+                <span>Day 1</span>
+                <strong>Tucumcari, NM</strong>
+                <span>752 mi</span>
+              </li>
+              <li>
+                <span>Day 2</span>
+                <strong>Forrest City, AR</strong>
+                <span>781 mi</span>
+              </li>
+              <li>
+                <span>Day 3</span>
+                <strong>Greensboro, NC</strong>
+                <span>723 mi</span>
+              </li>
+            </ol>
+          </section>
         </section>
 
-        <section class="section section-clean">
+        <section class="section">
+          <div class="section-head">
+            <h2>Built for actual road trips.</h2>
+            <p>
+              The trip stays close to the drive itself. Fuel stops are ranked by route fit, hotel areas are picked for usefulness, and the final plan is ready to carry with you.
+            </p>
+          </div>
+
           <div class="feature-grid">
             <article class="feature-card">
-              <div class="mini-label">Route</div>
-              <h3>Start with the fastest practical drive.</h3>
-              <p>The trip stays centered on the route first, then builds the stops around it.</p>
+              <h3>Route first</h3>
+              <p>Wayline starts with the fastest practical drive and splits it into days that feel normal.</p>
             </article>
 
             <article class="feature-card">
-              <div class="mini-label">Fuel</div>
-              <h3>Pick stops that fit the road.</h3>
-              <p>Wayline searches around each target window so better stops can beat bad detours.</p>
+              <h3>Fuel that fits the road</h3>
+              <p>Fuel stops are searched in a window around each target so a slightly earlier stop can beat a bad detour.</p>
             </article>
 
             <article class="feature-card">
-              <div class="mini-label">Hotels</div>
-              <h3>Stop where the night makes sense.</h3>
-              <p>Overnight areas are chosen for hotel usefulness and easier next-day access.</p>
+              <h3>Overnight areas that make sense</h3>
+              <p>Hotel picks favor normal stopping cities with chain options, easy access, and a good next-day start.</p>
             </article>
           </div>
         </section>
 
-        <section class="closing-band closing-band-center">
-          <div>
-            <div class="eyebrow">Ready when you are</div>
-            <h2>Open the planner and build the trip.</h2>
+        <section class="section section-split">
+          <div class="section-head section-head-narrow">
+            <h2>Leave with something usable.</h2>
           </div>
 
-          <div class="closing-actions">
-            <div class="cta-row">
-              <a class="primary-link" href="./planner/">Open planner</a>
-            </div>
+          <div class="detail-list">
+            <article class="detail-row">
+              <h3>Day-by-day itinerary</h3>
+              <p>Each day includes mileage, drive time, route overview, fuel stops, hotel options, and notes.</p>
+            </article>
+            <article class="detail-row">
+              <h3>Google Maps links</h3>
+              <p>Open the full trip or hand off a single day when you want something simpler on the phone.</p>
+            </article>
+            <article class="detail-row">
+              <h3>Exports</h3>
+              <p>Save the trip as PDF, text, or JSON when you want a printable copy or something to keep offline.</p>
+            </article>
           </div>
+        </section>
+
+        <section class="cta-section">
+          <div>
+            <h2>Open the planner and build the drive.</h2>
+            <p>Start with the route and let the stops follow.</p>
+          </div>
+          <a class="button button-primary" href="./planner/">Open planner</a>
         </section>
       </main>
 
       <footer class="site-footer">
         <div>
           <strong>Wayline</strong>
-          <p>Road-trip planning built on live routing and place data.</p>
+          <p>Road-trip planning built around the drive.</p>
         </div>
 
         <div class="footer-links">
           <a href="./privacy/">Privacy</a>
+          <a href="./planner/">Planner</a>
         </div>
       </footer>
     </div>

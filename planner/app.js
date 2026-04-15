@@ -128,7 +128,7 @@ function showSection(section) {
 function buildMetricCard(label, value, note) {
   return `
     <div class="metric-card">
-      <div class="metric-label">${escapeHtml(label)}</div>
+      <div class="metric-term">${escapeHtml(label)}</div>
       <div class="metric-value">${escapeHtml(value)}</div>
       ${note ? `<div class="metric-note">${escapeHtml(note)}</div>` : ""}
     </div>
@@ -137,9 +137,9 @@ function buildMetricCard(label, value, note) {
 
 function renderApiStatus() {
   const { environment, runtime } = state.appState;
-  const apiPill = environment.apiKeyConfigured
-    ? '<span class="status-pill good">Ready</span>'
-    : '<span class="status-pill warn">Unavailable</span>';
+  const apiStatus = environment.apiKeyConfigured
+    ? '<span class="status-indicator good">Ready</span>'
+    : '<span class="status-indicator warn">Unavailable</span>';
   const runtimeLabel =
     runtime === "hosted-web"
       ? "Hosted app"
@@ -158,29 +158,47 @@ function renderApiStatus() {
       ? "This preview only shows the interface. Live planning is not available here."
     : runtime === "hosted-web"
       ? "Trip planning is temporarily unavailable."
-      : runtime === "web"
-        ? "Add your Google Maps key to .env before starting the web preview."
+    : runtime === "web"
+      ? "Add your Google Maps key to .env before starting the web preview."
       : "Add your Google Maps key to .env before building a trip.";
 
   elements.runtimePill.textContent = runtimeLabel;
 
   if (runtime === "hosted-web") {
     elements.apiStatusCard.innerHTML = `
-      ${apiPill}
+      <div class="status-row">
+        <h3>Service status</h3>
+        ${apiStatus}
+      </div>
       <p>${escapeHtml(copy)}</p>
     `;
     return;
   }
 
   elements.apiStatusCard.innerHTML = `
-    ${apiPill}
+    <div class="status-row">
+      <h3>Service status</h3>
+      ${apiStatus}
+    </div>
     <p>${escapeHtml(copy)}</p>
-    <ul class="plain-list">
-      <li><strong>Runtime:</strong> ${escapeHtml(runtimeLabel)}</li>
-      <li><strong>Key source:</strong> ${escapeHtml(environment.envSourceLabel)}</li>
-      <li><strong>Enabled APIs:</strong> ${environment.requiredApis.map(escapeHtml).join(", ")}</li>
-      <li><strong>Region bias:</strong> ${escapeHtml(environment.regionCode)}</li>
-    </ul>
+    <dl class="status-list">
+      <div>
+        <dt>Runtime</dt>
+        <dd>${escapeHtml(runtimeLabel)}</dd>
+      </div>
+      <div>
+        <dt>Key source</dt>
+        <dd>${escapeHtml(environment.envSourceLabel)}</dd>
+      </div>
+      <div>
+        <dt>Enabled APIs</dt>
+        <dd>${environment.requiredApis.map(escapeHtml).join(", ")}</dd>
+      </div>
+      <div>
+        <dt>Region bias</dt>
+        <dd>${escapeHtml(environment.regionCode)}</dd>
+      </div>
+    </dl>
   `;
 }
 
@@ -233,24 +251,44 @@ function validateFormInput(input) {
 
 function renderRouteRibbon(result) {
   const { itinerary } = result;
-  const overnightChips = itinerary.overnightStops.length
-    ? itinerary.overnightStops
-        .map((stop, index) => `<span class="route-stop-chip">Night ${index + 1}: ${escapeHtml(stop.city)}</span>`)
-        .join("")
-    : '<span class="route-stop-chip">No overnight stops</span>';
+  const routeStops = [
+    {
+      label: "Start",
+      title: itinerary.summary.start,
+      detail: "Departure point",
+    },
+    ...itinerary.overnightStops.map((stop, index) => ({
+      label: `Night ${index + 1}`,
+      title: stop.city,
+      detail: `Around trip mile ${Math.round(stop.approxTripMiles)}`,
+    })),
+    {
+      label: "Finish",
+      title: itinerary.summary.end,
+      detail: "Final destination",
+    },
+  ];
 
   elements.routeRibbon.innerHTML = `
     <div>
-      <div class="micro-label">Route overview</div>
-      <h3>${escapeHtml(itinerary.summary.start)} to ${escapeHtml(itinerary.summary.end)}</h3>
-      <p>${escapeHtml(itinerary.summary.routeOverview)}</p>
+      <h2>${escapeHtml(itinerary.summary.start)} to ${escapeHtml(itinerary.summary.end)}</h2>
+      <p class="route-summary">${escapeHtml(itinerary.summary.routeOverview)}</p>
     </div>
-
-    <div class="route-line">
-      <div class="route-node">${escapeHtml(itinerary.summary.start)}</div>
-      <div class="route-track">${overnightChips}</div>
-      <div class="route-node">${escapeHtml(itinerary.summary.end)}</div>
-    </div>
+    <ol class="route-list">
+      ${routeStops
+        .map(
+          (stop) => `
+            <li>
+              <div class="route-label">${escapeHtml(stop.label)}</div>
+              <div class="route-value">
+                <strong>${escapeHtml(stop.title)}</strong>
+                <span class="meta">${escapeHtml(stop.detail)}</span>
+              </div>
+            </li>
+          `,
+        )
+        .join("")}
+    </ol>
   `;
 }
 
@@ -286,7 +324,6 @@ function renderJourneyRail(result) {
   elements.journeyRail.innerHTML = `
     <div class="panel-heading">
       <div>
-        <div class="micro-label">Progression</div>
         <h3>Trip outline</h3>
       </div>
       <span>${escapeHtml(`${result.itinerary.days.length} days planned with ${result.itinerary.gasStops.length} fuel stops`)}</span>
@@ -403,8 +440,7 @@ function renderMapsPanel(result) {
   elements.mapsPanel.innerHTML = `
     <div class="panel-heading">
       <div>
-        <div class="micro-label">Google Maps</div>
-        <h3>Google Maps handoff</h3>
+        <h3>Google Maps</h3>
       </div>
       <span>${escapeHtml(
         maps.mobileWaypointNote ||
@@ -431,14 +467,14 @@ function renderDays(result) {
         <article class="day-card">
           <div class="day-header">
             <div>
-              <div class="eyebrow">Day ${day.dayNumber}</div>
+              <div class="day-number">Day ${day.dayNumber}</div>
               <h3 class="day-title">${escapeHtml(day.startLocation)} to ${escapeHtml(day.endLocation)}</h3>
               <div class="day-route">${escapeHtml(day.mainRouteOverview)}</div>
             </div>
             <div class="day-side">
               <div class="day-stats">
-                <div class="stat-chip">${escapeHtml(formatMilesFromMeters(day.estimatedMiles))}</div>
-                <div class="stat-chip">${escapeHtml(formatDuration(day.estimatedDrivingTime))}</div>
+                <div>${escapeHtml(formatMilesFromMeters(day.estimatedMiles))}</div>
+                <div>${escapeHtml(formatDuration(day.estimatedDrivingTime))}</div>
               </div>
               ${
                 dayMapLink?.url
