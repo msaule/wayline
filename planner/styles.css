@@ -86,9 +86,9 @@ code {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 24px;
+  gap: 28px;
   min-height: 68px;
-  padding: 12px 24px;
+  padding: 14px 26px;
   border-inline: none;
   border-top: none;
   border-radius: 0;
@@ -154,7 +154,7 @@ code {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 16px;
+  gap: 18px;
   flex-wrap: wrap;
 }
 
@@ -213,22 +213,22 @@ code {
 
 .page-grid {
   display: grid;
-  grid-template-columns: 264px minmax(0, 1fr);
+  grid-template-columns: 368px minmax(0, 1fr);
   min-height: calc(100vh - 68px);
 }
 
 .sidebar {
   display: grid;
   align-content: start;
-  gap: 22px;
-  padding: 24px;
+  gap: 26px;
+  padding: 28px;
   background: var(--sidebar);
   border-right: 1px solid var(--line);
 }
 
 .sidebar-header {
   display: grid;
-  gap: 8px;
+  gap: 10px;
 }
 
 .sidebar h2 {
@@ -237,12 +237,12 @@ code {
 
 .planner-form {
   display: grid;
-  gap: 16px;
+  gap: 18px;
 }
 
 .field {
   display: grid;
-  gap: 8px;
+  gap: 9px;
 }
 
 .field span {
@@ -259,7 +259,7 @@ code {
 .field input,
 .field textarea {
   width: 100%;
-  padding: 12px 14px;
+  padding: 13px 14px;
   border: 1px solid var(--line);
   border-radius: 9px;
   background: var(--surface);
@@ -280,8 +280,8 @@ code {
 
 .status-panel {
   display: grid;
-  gap: 10px;
-  padding-top: 18px;
+  gap: 12px;
+  padding-top: 20px;
   border-top: 1px solid var(--line);
 }
 
@@ -332,23 +332,23 @@ code {
 .workspace,
 .result-shell {
   display: grid;
-  gap: 16px;
+  gap: 20px;
 }
 
 .workspace {
-  padding: 24px 28px 40px;
+  padding: 30px 34px 48px;
 }
 
 .state-panel,
 .panel,
 .day-card {
-  padding: 22px;
+  padding: 26px;
 }
 
 .empty-state {
   display: grid;
-  grid-template-columns: minmax(260px, 380px) minmax(0, 1fr);
-  gap: 24px;
+  grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+  gap: 28px;
   align-items: start;
   padding: 0;
   background: transparent;
@@ -358,7 +358,7 @@ code {
 
 .empty-copy {
   display: grid;
-  gap: 12px;
+  gap: 14px;
   align-content: start;
 }
 
@@ -376,7 +376,7 @@ code {
 .stack-list,
 .day-body {
   display: grid;
-  gap: 12px;
+  gap: 16px;
 }
 
 .empty-grid {
@@ -385,12 +385,12 @@ code {
 
 .subcard,
 .maps-card {
-  padding: 18px;
+  padding: 22px;
 }
 
 .subcard h4,
 .maps-card h4 {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   font-size: 1rem;
 }
 
@@ -414,9 +414,9 @@ code {
 .sample-days li {
   display: grid;
   grid-template-columns: 72px 1fr auto;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
-  padding: 12px 0;
+  padding: 14px 0;
   border-top: 1px solid var(--line);
 }
 
@@ -432,7 +432,7 @@ code {
 .loading-state {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
 }
 
 .loader-mark {
@@ -467,7 +467,7 @@ code {
 
 .route-hero {
   display: grid;
-  gap: 16px;
+  gap: 18px;
 }
 
 .route-hero h2 {
@@ -483,8 +483,8 @@ code {
 .route-list li {
   display: grid;
   grid-template-columns: 120px 1fr;
-  gap: 12px;
-  padding: 12px 0;
+  gap: 14px;
+  padding: 14px 0;
   border-top: 1px solid var(--line);
 }
 
@@ -508,7 +508,7 @@ code {
 }
 
 .metric-card {
-  padding: 16px 18px;
+  padding: 18px 20px;
 }
 
 .metric-term {
@@ -551,7 +551,7 @@ code {
 }
 
 .journey-stop {
-  padding: 16px;
+  padding: 18px;
 }
 
 .journey-stop-label {
@@ -575,17 +575,17 @@ code {
 }
 
 .stack-item {
-  padding: 14px 16px;
+  padding: 16px 18px;
 }
 
 .stack-item strong {
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .day-card {
   display: grid;
-  gap: 16px;
+  gap: 18px;
 }
 
 .day-number {
@@ -671,13 +671,13 @@ code {
 
   .workspace,
   .sidebar {
-    padding: 16px;
+    padding: 18px;
   }
 
   .panel,
   .state-panel,
   .day-card {
-    padding: 18px;
+    padding: 20px;
   }
 
   .field-grid,

@@ -181,24 +181,6 @@ function renderApiStatus() {
       ${apiStatus}
     </div>
     <p>${escapeHtml(copy)}</p>
-    <dl class="status-list">
-      <div>
-        <dt>Runtime</dt>
-        <dd>${escapeHtml(runtimeLabel)}</dd>
-      </div>
-      <div>
-        <dt>Key source</dt>
-        <dd>${escapeHtml(environment.envSourceLabel)}</dd>
-      </div>
-      <div>
-        <dt>Enabled APIs</dt>
-        <dd>${environment.requiredApis.map(escapeHtml).join(", ")}</dd>
-      </div>
-      <div>
-        <dt>Region bias</dt>
-        <dd>${escapeHtml(environment.regionCode)}</dd>
-      </div>
-    </dl>
   `;
 }
 
