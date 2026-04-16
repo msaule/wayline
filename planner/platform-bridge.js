@@ -3,62 +3,103 @@
     return;
   }
 
-  let lastKnownRuntime = "static-site";
-
-  const staticPreviewAppState = {
-    defaults: {
-      origin: "Las Vegas, NV",
-      destination: "Greensboro, NC",
-      gasStopIntervalMiles: 300,
-      drivingDays: 3,
-      preferredGasBrands: [
-        "Love's",
-        "Pilot",
-        "Flying J",
-        "TravelCenters of America",
-        "TA",
-        "QuikTrip",
-        "RaceTrac",
-        "Chevron",
-        "Shell",
-        "Exxon",
-        "BP",
-        "Murphy USA",
-        "Circle K",
-        "Buc-ee's",
-        "Speedway",
-        "Valero",
-        "Sunoco",
-        "7-Eleven",
-      ],
-      preferredHotelBrands: [
-        "Drury Inn & Suites",
-        "Hyatt Place",
-        "Hampton Inn",
-        "Holiday Inn Express",
-        "Fairfield Inn",
-        "Courtyard",
-        "La Quinta",
-        "Best Western Plus",
-        "SpringHill Suites",
-        "Home2 Suites",
-        "Tru by Hilton",
-        "Residence Inn",
-        "TownePlace Suites",
-        "Comfort Suites",
-      ],
-    },
-    environment: {
-      apiKeyConfigured: false,
-      envSourceLabel: "Static shell only",
-      envSourceDetail:
-        "This static build ships the interface only. Live planning needs the desktop app, local web server, or a hosted backend with /api routes.",
-      regionCode: "US",
-      requiredApis: ["Routes API", "Places API (New)"],
-    },
-    runtime: "static-site",
+  const defaultPlannerState = {
+    origin: "Las Vegas, NV",
+    destination: "Greensboro, NC",
+    gasStopIntervalMiles: 300,
+    drivingDays: 3,
+    preferredGasBrands: [
+      "Love's",
+      "Pilot",
+      "Flying J",
+      "TravelCenters of America",
+      "TA",
+      "QuikTrip",
+      "RaceTrac",
+      "Chevron",
+      "Shell",
+      "Exxon",
+      "BP",
+      "Murphy USA",
+      "Circle K",
+      "Buc-ee's",
+      "Speedway",
+      "Valero",
+      "Sunoco",
+      "7-Eleven",
+    ],
+    preferredHotelBrands: [
+      "Drury Inn & Suites",
+      "Hyatt Place",
+      "Hampton Inn",
+      "Holiday Inn Express",
+      "Fairfield Inn",
+      "Courtyard",
+      "La Quinta",
+      "Best Western Plus",
+      "SpringHill Suites",
+      "Home2 Suites",
+      "Tru by Hilton",
+      "Residence Inn",
+      "TownePlace Suites",
+      "Comfort Suites",
+    ],
   };
   const hostedPlannerBaseUrl = "https://wayline.vercel.app/planner/";
+  const hostname = (window.location.hostname || "").toLowerCase();
+
+  function inferRuntime() {
+    if (window.location.protocol === "file:") {
+      return "desktop";
+    }
+
+    if (hostname === "localhost" || hostname === "127.0.0.1" || hostname.endsWith(".local")) {
+      return "web";
+    }
+
+    if (hostname.endsWith("github.io")) {
+      return "static-site";
+    }
+
+    return "hosted-web";
+  }
+
+  function buildUnavailableAppState(runtime) {
+    const environmentByRuntime = {
+      "static-site": {
+        apiKeyConfigured: false,
+        envSourceLabel: "Preview only",
+        envSourceDetail: "This copy only shows the interface. Open the live planner to build trips.",
+      },
+      "hosted-web": {
+        apiKeyConfigured: false,
+        envSourceLabel: "Hosted app",
+        envSourceDetail: "The planner is live, but the service is not responding right now.",
+      },
+      web: {
+        apiKeyConfigured: false,
+        envSourceLabel: "Local web server",
+        envSourceDetail: "Add your Google Maps key to .env before building a trip.",
+      },
+      desktop: {
+        apiKeyConfigured: false,
+        envSourceLabel: "Desktop app",
+        envSourceDetail: "Add your Google Maps key to .env before building a trip.",
+      },
+    };
+
+    return {
+      defaults: defaultPlannerState,
+      environment: {
+        ...environmentByRuntime[runtime],
+        regionCode: "US",
+        requiredApis: ["Routes API", "Places API (New)"],
+      },
+      runtime,
+    };
+  }
+
+  let lastKnownRuntime = inferRuntime();
 
   function slugify(value) {
     return String(value || "road-trip")
@@ -149,15 +190,15 @@
 
         const payload = await readJson(response);
         if (payload?.defaults && payload?.environment) {
-          lastKnownRuntime = payload.runtime || lastKnownRuntime;
+          lastKnownRuntime = payload.runtime || inferRuntime();
           return payload;
         }
 
-        lastKnownRuntime = staticPreviewAppState.runtime;
-        return staticPreviewAppState;
+        lastKnownRuntime = inferRuntime();
+        return buildUnavailableAppState(lastKnownRuntime);
       } catch (_error) {
-        lastKnownRuntime = staticPreviewAppState.runtime;
-        return staticPreviewAppState;
+        lastKnownRuntime = inferRuntime();
+        return buildUnavailableAppState(lastKnownRuntime);
       }
     },
 
@@ -216,7 +257,7 @@
         return {
           ok: false,
           error: {
-            message: "This preview cannot build trips.",
+            message: "Open the live planner to build trips.",
             details: null,
           },
         };
