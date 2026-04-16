@@ -3,6 +3,8 @@
     return;
   }
 
+  let lastKnownRuntime = "static-site";
+
   const staticPreviewAppState = {
     defaults: {
       origin: "Las Vegas, NV",
@@ -142,11 +144,19 @@
           headers: {
             Accept: "application/json",
           },
+          cache: "no-store",
         });
 
         const payload = await readJson(response);
-        return payload?.defaults && payload?.environment ? payload : staticPreviewAppState;
+        if (payload?.defaults && payload?.environment) {
+          lastKnownRuntime = payload.runtime || lastKnownRuntime;
+          return payload;
+        }
+
+        lastKnownRuntime = staticPreviewAppState.runtime;
+        return staticPreviewAppState;
       } catch (_error) {
+        lastKnownRuntime = staticPreviewAppState.runtime;
         return staticPreviewAppState;
       }
     },
@@ -157,7 +167,9 @@
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Accept: "application/json",
           },
+          cache: "no-store",
           body: JSON.stringify(payload),
         });
 
@@ -168,7 +180,7 @@
         }
 
         throw new Error("Planner backend unavailable.");
-      } catch (_error) {
+      } catch (error) {
         if (window.location.hostname.endsWith("github.io")) {
           window.location.replace(buildHostedPlannerUrl(payload));
 
@@ -176,6 +188,26 @@
             ok: false,
             error: {
               message: "Opening the live planner.",
+              details: null,
+            },
+          };
+        }
+
+        if (lastKnownRuntime === "hosted-web") {
+          return {
+            ok: false,
+            error: {
+              message: error?.message || "Could not reach the planning service.",
+              details: null,
+            },
+          };
+        }
+
+        if (lastKnownRuntime === "web" || lastKnownRuntime === "desktop") {
+          return {
+            ok: false,
+            error: {
+              message: error?.message || "Could not reach the local planning service.",
               details: null,
             },
           };
